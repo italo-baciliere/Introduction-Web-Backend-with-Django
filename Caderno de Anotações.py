@@ -310,7 +310,7 @@ INTEGRATING DATABASES
 Acesse o diretório da aplicação pelo terminal,
 execute o comando:
 
-    $ pythom manage.py makemigrations
+    $ python manage.py makemigrations
     
 Save changes and send all these changes
 into our database. 
@@ -326,10 +326,10 @@ criar um usuário administrador para o painel admin.
 
     $ python manage.py createsuperuser
 
-Informe um nome,
-informe um email (opcional),
+Informe um nome: admin
+informe um email (opcional):
 informe uma senha e
-repita a mesma senha.
+repita a mesma senha: admin@admin
 
 Agora volte ao painel e insira os dados 
 do usuário recém criado.
@@ -341,10 +341,12 @@ CREATE DATABASE NAME FEATURE
 AND
 MIGRATE THAT INTO OUR DATABASE
 
-from .models import Feature
+In 'admin.py' file:
 
-# Register your models here.
-admin.site.register(Feature)
+    from .models import Feature
+
+    # Register your models here.
+    admin.site.register(Feature)
 
 Agora no Django Admin, será possível
 criar novos 'Features' in 'MYAPP'
