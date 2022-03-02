@@ -367,7 +367,74 @@ crie a variavél
 
 
 
+# USER REGISTRATION IN DJANGO
 
+'''
+In 'urls.py' file,
+add a new url.
+
+    ,
+    path('register', views.register, name='register')
+    
+In 'views.py' file,
+create a new function 'register'
+
+    def register(request):
+        return render(request, 'register.html')
+        
+In 'template' folder,
+create a new html file named 'register.html'
+
+In 'register.html' file,
+create a new form to user register.
+After the first tag form: <form>,
+enter a CSRF toker:
+    
+    {% csrf_token %}
+
+At register method,
+verify the request.method is equal 'POST',
+then create a user with attributes
+reference to form inputs:
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password_confirm = request.POST['password_confirm']
+    else:
+        return render(request, 'register.html')
+    
+In 'views.py' file, import the following packages:
+
+    from django.shortcuts import ..., redirect
+    from django.contrib.auth.models import User, auth
+    from django.contrib import messages
+    
+Check the repetition of password with password_confirm:
+
+        if password == password_confirm:
+            if User.objects.filter(email=email).exists():
+                messages.info(request, 'Email Already Used')
+                return redirect('register')
+            elif User.objects.filter(username=username).exists():
+                messages.info(request, 'Username Already used')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save();
+                return redirect('login')
+        else:
+            messages.info(request, 'Password Not The Same')
+            return redirect('register')
+
+After <form> tag,
+show the messages create in validating user:
+        
+    {% for message in messages %}
+    <h5>{{ message }}</h5>
+    {% endfor%}     
+'''
 
 
 
