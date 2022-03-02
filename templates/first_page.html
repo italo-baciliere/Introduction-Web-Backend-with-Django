@@ -1,0 +1,12 @@
+<h1 xmlns="http://www.w3.org/1999/html">
+    Hi, {{name}} helped me last week</br>
+    He are {{age}} years old.</br>
+    He are {{nationality}}.
+</h1>
+
+<h1>Input your text below:</h1>
+<form method="POST" action="counter">
+    {% csrf_token %}
+    <textarea name="text" rows="6" cols="50"></textarea></br>
+    <input type="submit">
+</form>
